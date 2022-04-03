@@ -1,0 +1,41 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 构建数据
+x_data = ["2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021"]
+y_data = [22000,16800,27100,18900,32200,21400,43200,23600,52000,19500,49500]
+y_data2 = [3570,4210,4800,5280,5840,6530,7420,8560,10100,12100,13800]
+y_data3=[0.162,0.251,0.177,0.279,0.181,0.305,0.172,0.363,0.194,0.621,0.279]
+# 绘图
+
+plt.figure(figsize=(40,42))
+fig, ax1 = plt.subplots()
+color = 'tab:red'
+ax1.set_xlabel('YEAR(y)')
+ax1.set_ylabel('Publications')
+
+plt.bar(x=x_data, height=y_data, label='Water Electrolysis', color='#87CEFA', alpha=0.8)
+plt.bar(x=x_data, height=y_data2, label='PEMWE',color='tab:blue', alpha=0.8)
+plt.legend(loc="upper left")
+# 在柱状图上显示具体数值, ha参数控制水平对齐方式, va控制垂直对齐方式
+
+
+
+
+ax2 = ax1.twinx()  # 创建共用x轴的第二个y轴
+plt.plot(x_data, y_data3,color="#FFA500", marker='.', ms=5, label="Ratio(PEMWE/WE)")
+for a, b in zip(x_data, y_data3):
+    plt.text(a, b, "%.2f%%" % (b * 100), ha='center', va='bottom', fontsize=6)
+plt.xticks(rotation=45)
+plt.legend(loc=[0.015,0.79])
+ax2.set_ylabel('Ratio')
+plt.grid(ls='--',axis='x') # 设置 y 就在轴方向显示网格线
+
+# 设置标题
+
+ax2.tick_params(axis='y')
+fig.tight_layout()
+
+# 为两条坐标轴设置名称
+
+plt.show()
